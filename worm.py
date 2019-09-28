@@ -1,6 +1,6 @@
 import requests #python提供的發送http請求的模組
 from bs4 import BeautifulSoup #bs4為module名稱 Beautiful...為functionname
-
+infoarray=[]
 url = "http://course-query.acad.ncku.edu.tw/qry/"
 resp = requests.get(url) #獲取網頁資料
 resp.encoding='utf-8'
@@ -22,6 +22,22 @@ resp = requests.get(eeurl) #獲取網頁資料
 resp.encoding='utf-8'
 if resp.status_code==requests.codes.ok: #確定連接成功
     eecourse=BeautifulSoup(resp.text,"html.parser")
-print(eecourse.prettify())
-#usercourse=eecourse.find_all("tr","td",value=num)
-#print(usercourse)
+usercourse=eecourse.find("td",string=num)
+print(usercourse)
+front=usercourse.find_previous_siblings("td",limit=1)
+back=usercourse.find_next_siblings("td",limit=14)
+for info in front:
+    infoarray.append(info.string)
+infoarray.append(num)
+for info in back:
+    #print(word.string)
+    infoarray.append(info.string)
+for info in infoarray:
+    if(info!=" "):
+        if(infoarray.index(info)==len(infoarray)-1):
+
+            print(info)
+        else:
+            print(info,end=" | ")
+        
+   
