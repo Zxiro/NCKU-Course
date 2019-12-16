@@ -1,1 +1,1 @@
-Trying to get the course easily
+Trying to get the course of NCKU easily
